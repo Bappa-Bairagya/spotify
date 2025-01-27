@@ -30,3 +30,23 @@
 .p-1{
     padding: 10px;
 }
+/* Dark Theme Scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #444; /* Dark gray thumb */
+    border-radius: 6px; /* Rounded corners */
+    border: 3px solid #333; /* Space between the thumb and track */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Slightly lighter gray when hovered */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #222; /* Very dark background for the track */
+    border-radius: 6px; /* Match the thumb corners */
+  }
+  

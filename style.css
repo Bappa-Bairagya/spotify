@@ -152,7 +152,8 @@ body{
 .songlist ul li{
     list-style-type: decimal;
     display: flex;
-    gap: 34px;
+    justify-content: space-between;
+    gap: 12px;
     cursor: pointer;
     padding: 12px 0;
     border: 1px solid white;
@@ -169,4 +170,12 @@ body{
     font-size: 15px;
     width: 64px;
     padding: 12px;
+}
+.info{
+    font-size: 13px;
+    width: 344px;
+}
+.songlist{
+    height: 400px;
+    overflow: auto;
 }

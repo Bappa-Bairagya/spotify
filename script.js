@@ -1,3 +1,4 @@
+let currentsong= new Audio();
 async function getsong() {
   let a = await fetch("http://127.0.0.1:3000/song/")
   let responce = await a.text();
@@ -13,26 +14,45 @@ async function getsong() {
   }
   return songs
 }
+const playmusic=(track)=>{
+//let audio =new Audio("/song/"+track)
+currentsong.src="/song/"+track
+currentsong.play()
+}
+
 async function main() {
+ 
   let song = await getsong()
   console.log(song)
   let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0]
   for (let s of song) {
-    songul.innerHTML = songul.innerHTML + `
-  <li>
-                        <img class="invert" src="music.svg" alt="">
-                        <div class="info">
-                            <div>${s.replaceAll("-128-ytshorts.savetube.me", " ")}</div>
-                            <div>Spotify</div>
-                        </div>
-                        <div class="playnow">
-                            <span>Play Now</span>
-                            <img class="invert" src="olay.svg" alt="">
-                        </div>
-                       </li>`
+    songul.innerHTML = songul.innerHTML + ` <li>
+<img class="invert" src="music.svg" alt="">
+ <div class="info">
+     <div>${s}</div>
+     <div>Spotify</div>
+</div>
+ <div class="playnow">
+    <span>Play Now</span>
+    <img class="invert" src="olay.svg" alt="">
+</div></li>`
   }
 
-  var audio = new Audio(song[0])
-  //audio.play()
+  Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
+    e.addEventListener("click",ele=>{
+      console.log(e.querySelector(".info").firstElementChild.innerHTML)
+      playmusic(e.querySelector(".info").firstElementChild.innerHTML)
+    })
+  });
+  play.addEventListener("click",()=>{
+    if (currentsong.paused) {
+      currentsong.play()
+      play.src="pause.svg"
+    }
+    else{
+      currentsong.pause()
+      play.src="olay.svg"
+    }
+  })
 }
 main()

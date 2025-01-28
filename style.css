@@ -135,11 +135,14 @@ body{
     font-size: 17px;
 }
 .playbar{
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 30px;
+    height: 40px;
     padding: 12px;
-    width: 95%;
-    background-color: #ffffff;
+    filter: invert(1);
+    width: 70vw;
+    background-color: #e2d9d9;
+    border-radius: 10px;
 }
 .songbuttons{
     display: flex;
@@ -179,4 +182,25 @@ body{
     height: 400px;
     overflow: auto;
 }
-uyfutf
+.seekbar{
+    height: 2px;
+    width: 98%;
+    background-color: black;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    margin: 6px;
+}
+.circle{
+    width: 13px;
+    height: 13px;
+    border-radius: 13px;
+    background-color: black;
+    position: relative;
+    bottom: 6px;
+    left: 0%;
+    transition: left 0.5s;
+}
+.songbuttons img{
+    cursor: pointer;
+}

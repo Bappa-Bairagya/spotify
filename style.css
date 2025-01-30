@@ -204,3 +204,10 @@ body{
 .songbuttons img{
     cursor: pointer;
 }
+.music{
+    display: flex;
+    justify-content: space-between;
+}
+.songinfo, .songtime{
+    color: black;
+}

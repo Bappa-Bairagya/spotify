@@ -18,6 +18,9 @@ const playmusic=(track)=>{
 //let audio =new Audio("/song/"+track)
 currentsong.src="/song/"+track
 currentsong.play()
+play.src="pause.svg"
+document.querySelector(".songinfo").innerHTML=track
+document.querySelector(".songtime").innerHTML="00:00/00:00"
 }
 
 async function main() {
@@ -53,6 +56,10 @@ async function main() {
       currentsong.pause()
       play.src="olay.svg"
     }
+  })
+  currentsong.addEventListener("timeupdate",()=>{
+console.log(currentsong.currentTime, currentsong.duration);
+
   })
 }
 main()

@@ -1,4 +1,4 @@
-let currentsong= new Audio();
+let currentsong = new Audio();
 async function getsong() {
   let a = await fetch("http://127.0.0.1:3000/song/")
   let responce = await a.text();
@@ -14,18 +14,24 @@ async function getsong() {
   }
   return songs
 }
-const playmusic=(track)=>{
-//let audio =new Audio("/song/"+track)
-currentsong.src="/song/"+track
-currentsong.play()
-play.src="pause.svg"
-document.querySelector(".songinfo").innerHTML=track
-document.querySelector(".songtime").innerHTML="00:00/00:00"
+const playmusic = (track,pause=false) => {
+  //let audio =new Audio("/song/"+track)
+  
+  currentsong.src = "/song/" + track
+  if(!pause){
+    currentsong.play()
+    play.src = "pause.svg"
+  }
+  
+  
+  document.querySelector(".songinfo").innerHTML = track
+  document.querySelector(".songtime").innerHTML = "00:00/00:00"
 }
 
 async function main() {
- 
+
   let song = await getsong()
+  playmusic(song[0],true)
   console.log(song)
   let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0]
   for (let s of song) {
@@ -42,24 +48,49 @@ async function main() {
   }
 
   Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
-    e.addEventListener("click",ele=>{
+    e.addEventListener("click", ele => {
       console.log(e.querySelector(".info").firstElementChild.innerHTML)
       playmusic(e.querySelector(".info").firstElementChild.innerHTML)
     })
   });
-  play.addEventListener("click",()=>{
+  play.addEventListener("click", () => {
     if (currentsong.paused) {
       currentsong.play()
-      play.src="pause.svg"
+      play.src = "pause.svg"
     }
-    else{
+    else {
       currentsong.pause()
-      play.src="olay.svg"
+      play.src = "olay.svg"
     }
   })
-  currentsong.addEventListener("timeupdate",()=>{
-console.log(currentsong.currentTime, currentsong.duration);
+  function convertSecondsToMinutes(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.floor(seconds % 60);
+    
+    // Ensure two-digit format
+    let formattedMinutes = String(minutes).padStart(2, '0');
+    let formattedSeconds = String(remainingSeconds).padStart(2, '0');
+    
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+  currentsong.addEventListener("timeupdate", () => {
+    console.log(currentsong.currentTime, currentsong.duration);
+    document.querySelector(".songtime").innerHTML = `${convertSecondsToMinutes(currentsong.currentTime)}/${convertSecondsToMinutes(currentsong.duration)}`
+    let c=document.querySelector(".circle").style.left=(currentsong.currentTime / currentsong.duration)* 100 +"%";
+    console.log(c);
+    
+  })
+  document.querySelector(".seekbar").addEventListener("click",(e)=>{
+    let percent=(e.offsetX/e.target.getBoundingClientRect().width)*100
+    document.querySelector(".circle").style.left= percent+"%"
+    currentsong.currentTime=((currentsong.duration)*percent)/100
+  })
+  document.querySelector(".ham").addEventListener("click",()=>{
+document.querySelector(".left").style.left="0"
 
+  })
+  document.querySelector(".close").addEventListener("click",()=>{
+    document.querySelector(".left").style.left="-120%"
   })
 }
 main()

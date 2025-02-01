@@ -4,7 +4,7 @@ let songs;
 let curfolder;
 async function getsong(folder) {
   curfolder = folder;
-  let a = await fetch(`/${folder}/`)
+  let a = await fetch(`/public/${folder}/`)
   let responce = await a.text();
   let div = document.createElement("div")
   div.innerHTML = responce

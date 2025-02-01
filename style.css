@@ -4,7 +4,9 @@ body {
     background-color: black;
     color: white;
 }
-
+:root{
+    --a:0
+}
 * {
     margin: 0;
     padding: 0;
@@ -86,25 +88,33 @@ body {
     
     gap: 10px;
     flex-wrap: wrap;
-    max-height: 70vh;
+    max-height: 59vh;
     overflow-y: auto;
 }
 
 .card {
     width: 200px;
     padding: 10px;
+    display: block;
     background-color: #252525;
     border-radius: 5px;
     position: relative;
+    transition: all 1s;
+}
+.card:hover{
+    background-color: rgb(69, 65, 65);
+    cursor: pointer;
+    --a:1
 }
 
 .card>* {
     padding-top: 10px;
 }
 
-.card img {
+.card .pic {
+    height: 200px;
     width: 100%;
-    object-fit: contain;
+    object-fit:cover;
 }
 
 .play {
@@ -119,10 +129,12 @@ body {
     position: absolute;
     right: 17px;
     top: 168px;
-    opacity: 0;
+    opacity: var(--a);
     transition: all 1s ease-out;
 }
-
+.play:hover{
+    opacity: 1;
+}
 .signup {
     background-color: rgb(34, 34, 34);
     color: grey;
@@ -248,6 +260,7 @@ body {
 .songinfo,
 .songtime {
     color: black;
+    width: 200px;
 }
 
 .ham {
@@ -288,17 +301,24 @@ body {
     }
 .music{
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
     align-items: center;
 }
     .ham {
         display: block;
     }
-    .card{
-        width: 90vw;
-    }
+    
+  .card .pic{
+    height: 200px;
+  }
     .cardcontainer{
+        padding-bottom: 180px;
         justify-content: center;
         margin: 0;
     }
+    .songinfo,
+.songtime {
+   
+    width: auto;
+}
 }

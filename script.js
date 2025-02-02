@@ -55,7 +55,7 @@ const playmusic = (track, pause = false) => {
 
 async function main() {
 
-  song = await getsong("/song/honey")
+  song = await getsong("song/honey")
   playmusic(songs[0], true)
   console.log(song)
 
